@@ -1,4 +1,6 @@
 // Dependência: QTRSensors by Pololu v4.0.0
+// Repositório oficial: https://github.com/pololu/qtr-sensors-arduino
+
 #include <QTRSensors.h>
 
 QTRSensors moduloSensores;
@@ -35,7 +37,7 @@ void setup() {
   // Configuração dos sensores
   moduloSensores.setTypeAnalog();
   moduloSensores.setSensorPins((const uint8_t[]){ PIN_D8, PIN_D7, PIN_D6, PIN_D5, PIN_D4, PIN_D3, PIN_D2, PIN_D1 }, NUM_SENSORES);
-  //moduloSensores.setEmitterPin(PIN_IR);
+  // moduloSensores.setEmitterPin(PIN_IR);
 
   // Calibragem
   delay(500);
