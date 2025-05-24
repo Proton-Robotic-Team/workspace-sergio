@@ -3,6 +3,7 @@
 #include "Motores.h"
 
 void setup() {
+  Serial.begin(115200);
   configurarPinos();
   configurarModuloQRE();
 }
@@ -10,9 +11,8 @@ void setup() {
 void loop() {
   mostrarValorSensoresQRE();
 
-  // Testes iniciais dos motores
   /*
-  short codigoDeDirecao = 1;
+  short codigoDeDirecao = 3;
   short porcentagemVelocidade = 100;
   direcao(codigoDeDirecao);
   controleDeVelocidade(codigoDeDirecao, porcentagemVelocidade);

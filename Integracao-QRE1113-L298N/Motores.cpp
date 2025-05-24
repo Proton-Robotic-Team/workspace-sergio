@@ -7,24 +7,24 @@ void direcao(short direcao) {
     // Para frente
     digitalWrite(PIN_IN1_L298N, HIGH);
     digitalWrite(PIN_IN2_L298N, LOW);
-    digitalWrite(PIN_IN3_L298N, HIGH);
-    digitalWrite(PIN_IN4_L298N, LOW);
+    digitalWrite(PIN_IN3_L298N, LOW);
+    digitalWrite(PIN_IN4_L298N, HIGH);
   } else if (direcao == 2) {
     // Para trás
     digitalWrite(PIN_IN1_L298N, LOW);
     digitalWrite(PIN_IN2_L298N, HIGH);
-    digitalWrite(PIN_IN3_L298N, LOW);
-    digitalWrite(PIN_IN4_L298N, HIGH);
+    digitalWrite(PIN_IN3_L298N, HIGH);
+    digitalWrite(PIN_IN4_L298N, LOW);
   } else if (direcao == 3) {
     // Para a direita
-    digitalWrite(PIN_IN1_L298N, LOW);
-    digitalWrite(PIN_IN2_L298N, HIGH);
+    digitalWrite(PIN_IN1_L298N, HIGH);
+    digitalWrite(PIN_IN2_L298N, LOW);
     digitalWrite(PIN_IN3_L298N, HIGH);
     digitalWrite(PIN_IN4_L298N, LOW);
   } else if (direcao == 4) {
     // Para a esquerda
-    digitalWrite(PIN_IN1_L298N, HIGH);
-    digitalWrite(PIN_IN2_L298N, LOW);
+    digitalWrite(PIN_IN1_L298N, LOW);
+    digitalWrite(PIN_IN2_L298N, HIGH);
     digitalWrite(PIN_IN3_L298N, LOW);
     digitalWrite(PIN_IN4_L298N, HIGH);
   } else {
