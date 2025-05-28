@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include "QRE1113.h"
 #include "Pinagem.h"
+#include "Configuracoes.h"
 
 QTRSensors moduloSensores;
 const uint8_t NUM_SENSORES = 8;
@@ -77,12 +78,24 @@ uint16_t posicaoFaixaBranca() {
   return moduloSensores.readLineWhite(valorDosSensores);
 }
 
+
 void valorSensoresQRE() {
   uint16_t posicao = posicaoFaixaBranca();
+  int contador = 0;
 
   for (uint8_t i = 0; i < NUM_SENSORES; i++) {
+    if (valorDosSensores[i] < 900) {
+      if (i == 0) {
+        contador = 0;
+      }
+      contador++;
+    }
     Serial.print(valorDosSensores[i]);
     Serial.print('\t');
+
+    if (contador == 8) {
+      pararCarro = true;
+    }
   }
   Serial.println(posicao);
 }

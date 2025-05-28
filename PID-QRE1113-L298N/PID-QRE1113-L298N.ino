@@ -11,7 +11,7 @@ void setup() {
 }
 
 void loop() {
-  // valorSensoresQRE();
+  valorSensoresQRE();
   seguirLinha();
   delay(DELAY_LOOP_MS);
 }
