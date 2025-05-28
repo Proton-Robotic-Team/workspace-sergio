@@ -2,6 +2,7 @@
 #define QRE1113_H
 
 void configurarModuloQRE();
-void mostrarValorSensoresQRE();
+uint16_t posicaoFaixaBranca();
+void valorSensoresQRE();
 
 #endif

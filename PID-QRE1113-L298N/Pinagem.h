@@ -1,7 +1,6 @@
 #ifndef PINAGEM_H
 #define PINAGEM_H
 
-// const uint8_t PIN_IR = ?;
 const uint8_t PIN_LED_ESP32 = 2;
 
 const uint8_t PIN_D1 = 34;

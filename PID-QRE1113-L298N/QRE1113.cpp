@@ -3,10 +3,10 @@
 
 #include <QTRSensors.h>
 #include <Arduino.h>
+#include "QRE1113.h"
 #include "Pinagem.h"
 
 QTRSensors moduloSensores;
-
 const uint8_t NUM_SENSORES = 8;
 const uint8_t TEMPO_CALIBRAGEM_S = 10;
 uint16_t valorDosSensores[NUM_SENSORES];
@@ -24,13 +24,27 @@ uint16_t iteracoesCalibragem() {
   }
 }
 
+void delayAntesDoStart() {
+
+  long inicio = millis();
+  long agora = 0;
+  int tempoAntesDoStart = 5000;
+
+  while ((agora - inicio) < tempoAntesDoStart) {
+    agora = millis();
+    digitalWrite(PIN_LED_ESP32, LOW);
+    delay(250);
+    digitalWrite(PIN_LED_ESP32, HIGH);
+    delay(250);
+  }
+
+  digitalWrite(PIN_LED_ESP32, LOW);
+}
+
 void configurarModuloQRE() {
-  // Configuração dos sensores
   moduloSensores.setTypeAnalog();
   moduloSensores.setSensorPins((const uint8_t[]){ PIN_D8, PIN_D7, PIN_D6, PIN_D5, PIN_D4, PIN_D3, PIN_D2, PIN_D1 }, NUM_SENSORES);
-  // moduloSensores.setEmitterPin(PIN_IR);
 
-  // Calibragem
   delay(500);
 
   digitalWrite(PIN_LED_ESP32, HIGH);
@@ -41,7 +55,6 @@ void configurarModuloQRE() {
 
   digitalWrite(PIN_LED_ESP32, LOW);
 
-  Serial.begin(115200);
   Serial.println("Valores mínimos e máximos medidos durante a calibragem:");
 
   for (uint8_t i = 0; i < NUM_SENSORES; i++) {
@@ -56,19 +69,20 @@ void configurarModuloQRE() {
   }
   Serial.println();
   Serial.println();
-  delay(1000);
+
+  delayAntesDoStart();
 }
 
-void mostrarValorSensoresQRE() {
-  uint16_t posicao = moduloSensores.readLineWhite(valorDosSensores);
+uint16_t posicaoFaixaBranca() {
+  return moduloSensores.readLineWhite(valorDosSensores);
+}
 
-  // Printa o valor dos sensores (0 é o máximo de refletância e 1000 o
-  // mínimo) e na última coluna a posição da linha.
+void valorSensoresQRE() {
+  uint16_t posicao = posicaoFaixaBranca();
+
   for (uint8_t i = 0; i < NUM_SENSORES; i++) {
     Serial.print(valorDosSensores[i]);
     Serial.print('\t');
   }
   Serial.println(posicao);
-
-  // delay(100);
 }
