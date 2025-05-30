@@ -19,7 +19,7 @@ const float KD = 0.1;   //0.1
 
 // Outros
 const uint8_t DELAY_LOOP_MS = 15;
-const bool DEBUG_ATIVADO = true;
+const bool DEBUG_ATIVADO = false;
 extern bool pararCarro;
 
 #endif
