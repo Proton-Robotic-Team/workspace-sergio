@@ -26,7 +26,7 @@ inline void configurarPinos() {
   pinMode(PIN_IN2_L298N, OUTPUT);
   pinMode(PIN_IN3_L298N, OUTPUT);
   pinMode(PIN_IN4_L298N, OUTPUT);
-  pinMode(PIN_ENB_L298N, OUTPUT)
+  pinMode(PIN_ENB_L298N, OUTPUT);
 }
 
 #endif
