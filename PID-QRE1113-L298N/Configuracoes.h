@@ -13,13 +13,20 @@ const uint8_t DUTY_CYCLE_MED = 220;  // 180, 215, 220 (valores testados anterior
 const uint8_t DUTY_CYCLE_MAX = 255;  // 230, 255, 255 (valores testados anteriormente)
 
 // Variáveis do PID
-const float KP = 0.02;  // 0.02
-const float KI = 0.0;   // 0.0
-const float KD = 0.1;   //0.1
+extern float KP;
+extern float KI;
+extern float KD;
+
+// Para contador de tempo de percurso
+extern long inicioDoPercurso;
+extern long tempoTotalDePercurso;
+extern bool tempoDePercursoContabilizado;
 
 // Outros
 const uint8_t DELAY_LOOP_MS = 15;
 const bool DEBUG_ATIVADO = false;
 extern bool pararCarro;
+extern bool modoDeConfiguracao;
+extern short menuAtual;
 
 #endif

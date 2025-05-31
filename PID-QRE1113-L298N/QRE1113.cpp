@@ -78,7 +78,6 @@ uint16_t posicaoFaixaBranca() {
   return moduloSensores.readLineWhite(valorDosSensores);
 }
 
-
 void valorSensoresQRE() {
   uint16_t posicao = posicaoFaixaBranca();
   int contador = 0;
