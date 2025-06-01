@@ -21,6 +21,11 @@ short centralizarTxtVertical() {
   return (ALTURA_DO_DISPLAY + alturaDoTexto) / 2;
 }
 
+void centralizar(char *titulo) {
+  // Espaçamento a esquerda, espaçamento superior, texto
+  u8g2.drawStr(centralizarTxtHorizontal(titulo), centralizarTxtVertical(), titulo);
+}
+
 void itemDoMenu(char *titulo, char *valor) {
   const short POSICAO_VERTICAL_TITULO = 20;
   const short POSICAO_VERTICAL_VALOR = 50;
@@ -63,6 +68,18 @@ void display(char *titulo, char *valor, bool menuAnterior, bool menuPosterior) {
   u8g2.sendBuffer();
 }
 
+void display(char *titulo) {
+  u8g2.clearBuffer();
+  u8g2.setFont(u8g2_font_fub17_tr);
+  centralizar(titulo);
+  u8g2.sendBuffer();
+}
+
 void iniciarDisplay() {
   u8g2.begin();
+}
+
+void limparDisplay() {
+  u8g2.clearBuffer();
+  u8g2.sendBuffer();
 }

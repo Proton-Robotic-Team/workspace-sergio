@@ -12,15 +12,18 @@ void setup() {
   pinMode(PIN_CONFIG_MODE, INPUT_PULLUP);
   modoDeConfiguracao = digitalRead(PIN_CONFIG_MODE) == LOW;
   configuracoesSalvas();
+  iniciarDisplay();
 
   if (modoDeConfiguracao) {
     configurarPinosModoConfig();
   } else {
     configurarPinosModoNormal();
+    display("Calibrando");
     configurarModuloQRE();
+    display("Iniciando");
+    delayAntesDoStart();
+    limparDisplay();
   }
-
-  iniciarDisplay();
 }
 
 void loop() {

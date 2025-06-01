@@ -70,8 +70,6 @@ void configurarModuloQRE() {
   }
   Serial.println();
   Serial.println();
-
-  delayAntesDoStart();
 }
 
 uint16_t posicaoFaixaBranca() {
