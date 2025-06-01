@@ -81,4 +81,6 @@ void menuConfigurarCarro() {
     KD = max(KD, 0.0f);
     ultimaTroca = millis();
   }
+
+  salvarConfiguracoes();
 }

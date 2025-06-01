@@ -29,4 +29,7 @@ extern bool pararCarro;
 extern bool modoDeConfiguracao;
 extern short menuAtual;
 
+void configuracoesSalvas();
+void salvarConfiguracoes();
+
 #endif
