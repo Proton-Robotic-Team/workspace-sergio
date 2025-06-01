@@ -35,7 +35,7 @@ void menuConfigurarCarro() {
     return;
   }
 
-  if (botaoDireitaPressionado && menuAtual < 3) {
+  if (botaoDireitaPressionado && menuAtual < 6) {
     menuAtual++;
     ultimaTroca = millis();
   } else if (botaoEsquerdaPressionado && menuAtual > 1) {
@@ -54,7 +54,19 @@ void menuConfigurarCarro() {
   } else if (menuAtual == 3) {
     char valorKD[6];
     snprintf(valorKD, sizeof(valorKD), "%.3f", KD);
-    display("D", valorKD, true, false);
+    display("D", valorKD, true, true);
+  } else if (menuAtual == 4) {
+    char valorDCMIN[4];
+    snprintf(valorDCMIN, sizeof(valorDCMIN), "%d", DUTY_CYCLE_MIN);
+    display("DC_MIN", valorDCMIN, true, true);
+  } else if (menuAtual == 5) {
+    char valorDCMED[4];
+    snprintf(valorDCMED, sizeof(valorDCMED), "%d", DUTY_CYCLE_MED);
+    display("DC_MED", valorDCMED, true, true);
+  } else if (menuAtual == 6) {
+    char valorDCMAX[4];
+    snprintf(valorDCMAX, sizeof(valorDCMAX), "%d", DUTY_CYCLE_MAX);
+    display("DC_MAX", valorDCMAX, true, false);
   }
 
   if (menuAtual == 1 && botaoIncrementoPressionado) {
@@ -65,6 +77,15 @@ void menuConfigurarCarro() {
     ultimaTroca = millis();
   } else if (menuAtual == 3 && botaoIncrementoPressionado) {
     KD += 0.1;
+    ultimaTroca = millis();
+  } else if (menuAtual == 4 && botaoIncrementoPressionado && DUTY_CYCLE_MIN < 255) {
+    DUTY_CYCLE_MIN += 1;
+    ultimaTroca = millis();
+  } else if (menuAtual == 5 && botaoIncrementoPressionado && DUTY_CYCLE_MED < 255) {
+    DUTY_CYCLE_MED += 1;
+    ultimaTroca = millis();
+  } else if (menuAtual == 6 && botaoIncrementoPressionado && DUTY_CYCLE_MAX < 255) {
+    DUTY_CYCLE_MAX += 1;
     ultimaTroca = millis();
   }
 
@@ -79,6 +100,15 @@ void menuConfigurarCarro() {
   } else if (menuAtual == 3 && botaoDecrementoPressionado && KD > 0.0f) {
     KD -= 0.100f;
     KD = max(KD, 0.0f);
+    ultimaTroca = millis();
+  } else if (menuAtual == 4 && botaoDecrementoPressionado && DUTY_CYCLE_MIN > 0) {
+    DUTY_CYCLE_MIN -= 1;
+    ultimaTroca = millis();
+  } else if (menuAtual == 5 && botaoDecrementoPressionado && DUTY_CYCLE_MED > 0) {
+    DUTY_CYCLE_MED -= 1;
+    ultimaTroca = millis();
+  } else if (menuAtual == 6 && botaoDecrementoPressionado && DUTY_CYCLE_MAX > 0) {
+    DUTY_CYCLE_MAX -= 1;
     ultimaTroca = millis();
   }
 
