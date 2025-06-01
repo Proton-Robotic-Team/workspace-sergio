@@ -21,96 +21,115 @@ void menuTempoDePercurso() {
   }
 }
 
-void menuConfigurarCarro() {
-
-  bool botaoEsquerdaPressionado = (digitalRead(PIN_MENU_ESQUERDA) == LOW);
-  bool botaoDireitaPressionado = (digitalRead(PIN_MENU_DIREITA) == LOW);
-  bool botaoIncrementoPressionado = (digitalRead(PIN_MENU_INCREMENTO) == LOW);
-  bool botaoDecrementoPressionado = (digitalRead(PIN_MENU_DECREMENTO) == LOW);
-
+void atualizarMenuAtual(bool direita, bool esquerda) {
   static unsigned long ultimaTroca = 0;
-  const unsigned long intervaloDebounce = 200;
 
-  if (millis() - ultimaTroca < intervaloDebounce) {
+  if (millis() - ultimaTroca < INTERVALO_DEBOUNCE_MS) {
     return;
   }
 
-  if (botaoDireitaPressionado && menuAtual < 6) {
+  if (direita && menuAtual < 6) {
     menuAtual++;
     ultimaTroca = millis();
-  } else if (botaoEsquerdaPressionado && menuAtual > 1) {
+  } else if (esquerda && menuAtual > 1) {
     menuAtual--;
     ultimaTroca = millis();
   }
+}
 
-  if (menuAtual == 1) {
-    char valorKP[6];
-    snprintf(valorKP, sizeof(valorKP), "%.3f", KP);
-    display("P", valorKP, false, true);
-  } else if (menuAtual == 2) {
-    char valorKI[6];
-    snprintf(valorKI, sizeof(valorKI), "%.3f", KI);
-    display("I", valorKI, true, true);
-  } else if (menuAtual == 3) {
-    char valorKD[6];
-    snprintf(valorKD, sizeof(valorKD), "%.3f", KD);
-    display("D", valorKD, true, true);
-  } else if (menuAtual == 4) {
-    char valorDCMIN[4];
-    snprintf(valorDCMIN, sizeof(valorDCMIN), "%d", DUTY_CYCLE_MIN);
-    display("DC_MIN", valorDCMIN, true, true);
-  } else if (menuAtual == 5) {
-    char valorDCMED[4];
-    snprintf(valorDCMED, sizeof(valorDCMED), "%d", DUTY_CYCLE_MED);
-    display("DC_MED", valorDCMED, true, true);
-  } else if (menuAtual == 6) {
-    char valorDCMAX[4];
-    snprintf(valorDCMAX, sizeof(valorDCMAX), "%d", DUTY_CYCLE_MAX);
-    display("DC_MAX", valorDCMAX, true, false);
+void exibirValorAtual() {
+  char buffer[6];
+  switch (menuAtual) {
+    case 1:
+      snprintf(buffer, sizeof(buffer), "%.3f", KP);
+      display("P", buffer, false, true);
+      break;
+    case 2:
+      snprintf(buffer, sizeof(buffer), "%.3f", KI);
+      display("I", buffer, true, true);
+      break;
+    case 3:
+      snprintf(buffer, sizeof(buffer), "%.3f", KD);
+      display("D", buffer, true, true);
+      break;
+    case 4:
+      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MIN);
+      display("DC MIN", buffer, true, true);
+      break;
+    case 5:
+      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MED);
+      display("DC MED", buffer, true, true);
+      break;
+    case 6:
+      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MAX);
+      display("DC MAX", buffer, true, false);
+      break;
+  }
+}
+
+void ajustarParametro(bool incremento, bool decremento) {
+  static unsigned long ultimaTroca = 0;
+
+  if (millis() - ultimaTroca < INTERVALO_DEBOUNCE_MS) {
+    return;
   }
 
-  if (menuAtual == 1 && botaoIncrementoPressionado) {
-    KP += 0.01;
+  if (incremento) {
+    switch (menuAtual) {
+      case 1:
+        KP += PASSO_INCREMENTO_KP;
+        break;
+      case 2:
+        KI += PASSO_INCREMENTO_KI;
+        break;
+      case 3:
+        KD += PASSO_DECREMENTO_KD;
+        break;
+      case 4:
+        if (DUTY_CYCLE_MIN < 255) DUTY_CYCLE_MIN += 1;
+        break;
+      case 5:
+        if (DUTY_CYCLE_MED < 255) DUTY_CYCLE_MED += 1;
+        break;
+      case 6:
+        if (DUTY_CYCLE_MAX < 255) DUTY_CYCLE_MAX += 1;
+        break;
+    }
     ultimaTroca = millis();
-  } else if (menuAtual == 2 && botaoIncrementoPressionado) {
-    KI += 0.001;
-    ultimaTroca = millis();
-  } else if (menuAtual == 3 && botaoIncrementoPressionado) {
-    KD += 0.1;
-    ultimaTroca = millis();
-  } else if (menuAtual == 4 && botaoIncrementoPressionado && DUTY_CYCLE_MIN < 255) {
-    DUTY_CYCLE_MIN += 1;
-    ultimaTroca = millis();
-  } else if (menuAtual == 5 && botaoIncrementoPressionado && DUTY_CYCLE_MED < 255) {
-    DUTY_CYCLE_MED += 1;
-    ultimaTroca = millis();
-  } else if (menuAtual == 6 && botaoIncrementoPressionado && DUTY_CYCLE_MAX < 255) {
-    DUTY_CYCLE_MAX += 1;
+  } else if (decremento) {
+    switch (menuAtual) {
+      case 1:
+        KP = max(KP - PASSO_INCREMENTO_KP, 0.0f);
+        break;
+      case 2:
+        KI = max(KI - PASSO_INCREMENTO_KI, 0.0f);
+        break;
+      case 3:
+        KD = max(KD - PASSO_DECREMENTO_KD, 0.0f);
+        break;
+      case 4:
+        if (DUTY_CYCLE_MIN > 0) DUTY_CYCLE_MIN -= 1;
+        break;
+      case 5:
+        if (DUTY_CYCLE_MED > 0) DUTY_CYCLE_MED -= 1;
+        break;
+      case 6:
+        if (DUTY_CYCLE_MAX > 0) DUTY_CYCLE_MAX -= 1;
+        break;
+    }
     ultimaTroca = millis();
   }
+}
 
-  if (menuAtual == 1 && botaoDecrementoPressionado && KP > 0.0f) {
-    KP -= 0.010f;
-    KP = max(KP, 0.0f);
-    ultimaTroca = millis();
-  } else if (menuAtual == 2 && botaoDecrementoPressionado && KI > 0.0f) {
-    KI -= 0.001f;
-    KI = max(KI, 0.0f);
-    ultimaTroca = millis();
-  } else if (menuAtual == 3 && botaoDecrementoPressionado && KD > 0.0f) {
-    KD -= 0.100f;
-    KD = max(KD, 0.0f);
-    ultimaTroca = millis();
-  } else if (menuAtual == 4 && botaoDecrementoPressionado && DUTY_CYCLE_MIN > 0) {
-    DUTY_CYCLE_MIN -= 1;
-    ultimaTroca = millis();
-  } else if (menuAtual == 5 && botaoDecrementoPressionado && DUTY_CYCLE_MED > 0) {
-    DUTY_CYCLE_MED -= 1;
-    ultimaTroca = millis();
-  } else if (menuAtual == 6 && botaoDecrementoPressionado && DUTY_CYCLE_MAX > 0) {
-    DUTY_CYCLE_MAX -= 1;
-    ultimaTroca = millis();
-  }
+void menuConfigurarCarro() {
+  bool botaoEsquerda = (digitalRead(PIN_MENU_ESQUERDA) == LOW);
+  bool botaoDireita = (digitalRead(PIN_MENU_DIREITA) == LOW);
+  bool botaoIncremento = (digitalRead(PIN_MENU_INCREMENTO) == LOW);
+  bool botaoDecremento = (digitalRead(PIN_MENU_DECREMENTO) == LOW);
+
+  atualizarMenuAtual(botaoDireita, botaoEsquerda);
+  exibirValorAtual();
+  ajustarParametro(botaoIncremento, botaoDecremento);
 
   salvarConfiguracoes();
 }
