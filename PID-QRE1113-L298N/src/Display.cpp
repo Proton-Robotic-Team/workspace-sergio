@@ -11,7 +11,7 @@ U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 const short ALTURA_DO_DISPLAY = 64;
 const short LARGURA_DO_DISPLAY = 128;
 
-short centralizarTxtHorizontal(char *texto) {
+short centralizarTxtHorizontal(const char *texto) {
   short larguraDoTexto = u8g2.getStrWidth(texto);
   return (LARGURA_DO_DISPLAY - larguraDoTexto) / 2;
 }
@@ -21,12 +21,12 @@ short centralizarTxtVertical() {
   return (ALTURA_DO_DISPLAY + alturaDoTexto) / 2;
 }
 
-void centralizar(char *titulo) {
+void centralizar(const char *titulo) {
   // Espaçamento a esquerda, espaçamento superior, texto
   u8g2.drawStr(centralizarTxtHorizontal(titulo), centralizarTxtVertical(), titulo);
 }
 
-void itemDoMenu(char *titulo, char *valor) {
+void itemDoMenu(const char *titulo, const char *valor) {
   const short POSICAO_VERTICAL_TITULO = 20;
   const short POSICAO_VERTICAL_VALOR = 50;
 
@@ -60,7 +60,7 @@ void mensagemDeErro() {
   delay(1500);
 }
 
-void display(char *titulo, char *valor, bool menuAnterior, bool menuPosterior) {
+void display(const char *titulo, const char *valor, bool menuAnterior, bool menuPosterior) {
   u8g2.clearBuffer();
   u8g2.setFont(u8g2_font_fub17_tr);
   itemDoMenu(titulo, valor);
@@ -68,7 +68,7 @@ void display(char *titulo, char *valor, bool menuAnterior, bool menuPosterior) {
   u8g2.sendBuffer();
 }
 
-void display(char *titulo) {
+void display(const char *titulo) {
   u8g2.clearBuffer();
   u8g2.setFont(u8g2_font_fub17_tr);
   centralizar(titulo);

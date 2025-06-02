@@ -1,6 +1,9 @@
 #ifndef PINAGEM_H
 #define PINAGEM_H
 
+#include <Arduino.h>
+#include "Configuracoes.h"
+
 const uint8_t PIN_LED_ESP32 = 2;
 
 const uint8_t PIN_D1 = 36;
@@ -33,6 +36,8 @@ inline void configurarPinosModoNormal() {
   pinMode(PIN_IN3_L298N, OUTPUT);
   pinMode(PIN_IN4_L298N, OUTPUT);
   pinMode(PIN_ENB_L298N, OUTPUT);
+  ledcAttach(PIN_ENA_L298N, FREQUENCIA_HZ, RESOLUCAO);
+  ledcAttach(PIN_ENB_L298N, FREQUENCIA_HZ, RESOLUCAO);
 }
 
 inline void configurarPinosModoConfig() {

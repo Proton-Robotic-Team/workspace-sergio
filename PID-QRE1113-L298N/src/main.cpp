@@ -7,7 +7,6 @@
 #include "Menus.h"
 
 void setup() {
-  Serial.begin(115200);
 
   pinMode(PIN_CONFIG_MODE, INPUT_PULLUP);
   modoDeConfiguracao = digitalRead(PIN_CONFIG_MODE) == LOW;
@@ -17,6 +16,7 @@ void setup() {
   if (modoDeConfiguracao) {
     configurarPinosModoConfig();
   } else {
+    Serial.begin(115200);
     configurarPinosModoNormal();
     display("Calibrando");
     configurarModuloQRE();
