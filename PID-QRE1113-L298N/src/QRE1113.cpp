@@ -29,7 +29,7 @@ void delayAntesDoStart() {
 
   long inicio = millis();
   long agora = 0;
-  int tempoAntesDoStart = 5000;
+  uint16_t tempoAntesDoStart = 5000;
 
   while ((agora - inicio) < tempoAntesDoStart) {
     agora = millis();
@@ -78,7 +78,7 @@ uint16_t posicaoFaixaBranca() {
 
 void valorSensoresQRE() {
   uint16_t posicao = posicaoFaixaBranca();
-  int contador = 0;
+  uint16_t contador = 0;
 
   for (uint8_t i = 0; i < NUM_SENSORES; i++) {
     if (valorDosSensores[i] < 900) {

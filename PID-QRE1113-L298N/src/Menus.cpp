@@ -57,12 +57,12 @@ void exibirValorAtual() {
       display("DC MIN", buffer, true, true);
       break;
     case 5:
-      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MED);
-      display("DC MED", buffer, true, true);
+      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MAX);
+      display("DC MAX", buffer, true, true);
       break;
     case 6:
-      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_MAX);
-      display("DC MAX", buffer, true, false);
+      snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_BASE);
+      display("DC BASE", buffer, true, false);
       break;
   }
 }
@@ -89,10 +89,10 @@ void ajustarParametro(bool incremento, bool decremento) {
         if (DUTY_CYCLE_MIN < 255) DUTY_CYCLE_MIN += 1;
         break;
       case 5:
-        if (DUTY_CYCLE_MED < 255) DUTY_CYCLE_MED += 1;
+        if (DUTY_CYCLE_MAX < 255) DUTY_CYCLE_MAX += 1;
         break;
       case 6:
-        if (DUTY_CYCLE_MAX < 255) DUTY_CYCLE_MAX += 1;
+        if (DUTY_CYCLE_BASE < 255) DUTY_CYCLE_BASE += 1;
         break;
     }
     ultimaTroca = millis();
@@ -111,10 +111,10 @@ void ajustarParametro(bool incremento, bool decremento) {
         if (DUTY_CYCLE_MIN > 0) DUTY_CYCLE_MIN -= 1;
         break;
       case 5:
-        if (DUTY_CYCLE_MED > 0) DUTY_CYCLE_MED -= 1;
+        if (DUTY_CYCLE_MAX > 0) DUTY_CYCLE_MAX -= 1;
         break;
       case 6:
-        if (DUTY_CYCLE_MAX > 0) DUTY_CYCLE_MAX -= 1;
+        if (DUTY_CYCLE_BASE > 0) DUTY_CYCLE_BASE -= 1;
         break;
     }
     ultimaTroca = millis();

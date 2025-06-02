@@ -8,16 +8,16 @@
 
 U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 
-const short ALTURA_DO_DISPLAY = 64;
-const short LARGURA_DO_DISPLAY = 128;
+const uint8_t ALTURA_DO_DISPLAY = 64;
+const uint8_t LARGURA_DO_DISPLAY = 128;
 
-short centralizarTxtHorizontal(const char *texto) {
-  short larguraDoTexto = u8g2.getStrWidth(texto);
+uint8_t centralizarTxtHorizontal(const char *texto) {
+  uint8_t larguraDoTexto = u8g2.getStrWidth(texto);
   return (LARGURA_DO_DISPLAY - larguraDoTexto) / 2;
 }
 
-short centralizarTxtVertical() {
-  short alturaDoTexto = u8g2.getAscent() - u8g2.getDescent();
+uint8_t centralizarTxtVertical() {
+  uint8_t alturaDoTexto = u8g2.getAscent() - u8g2.getDescent();
   return (ALTURA_DO_DISPLAY + alturaDoTexto) / 2;
 }
 
@@ -27,8 +27,8 @@ void centralizar(const char *titulo) {
 }
 
 void itemDoMenu(const char *titulo, const char *valor) {
-  const short POSICAO_VERTICAL_TITULO = 20;
-  const short POSICAO_VERTICAL_VALOR = 50;
+  const uint8_t POSICAO_VERTICAL_TITULO = 20;
+  const uint8_t POSICAO_VERTICAL_VALOR = 50;
 
   // Espaçamento a esquerda, espaçamento superior, texto
   u8g2.drawStr(centralizarTxtHorizontal(titulo), POSICAO_VERTICAL_TITULO, titulo);
@@ -41,7 +41,7 @@ void iconesDeNavegacao(bool anterior, bool posterior) {
 
   if (posterior) {
     char proximoMenu[] = ">";
-    int distanciaEsquerda = LARGURA_DO_DISPLAY - u8g2.getStrWidth(proximoMenu);
+    int16_t distanciaEsquerda = LARGURA_DO_DISPLAY - u8g2.getStrWidth(proximoMenu);
     u8g2.drawStr(distanciaEsquerda, centralizarTxtVertical(), proximoMenu);
   }
 

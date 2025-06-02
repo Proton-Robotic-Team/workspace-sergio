@@ -9,8 +9,8 @@ const uint8_t RESOLUCAO = 8;
 
 // Valores padrão para o PWM
 extern uint8_t DUTY_CYCLE_MIN;
-extern uint8_t DUTY_CYCLE_MED;
 extern uint8_t DUTY_CYCLE_MAX;
+extern uint8_t DUTY_CYCLE_BASE;
 
 // Variáveis do PID
 extern float KP;
@@ -33,7 +33,7 @@ const uint8_t DELAY_LOOP_MS = 15;
 const bool DEBUG_ATIVADO = false;
 extern bool pararCarro;
 extern bool modoDeConfiguracao;
-extern short menuAtual;
+extern uint8_t menuAtual;
 
 void configuracoesSalvas();
 void salvarConfiguracoes();
