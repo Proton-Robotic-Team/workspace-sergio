@@ -66,11 +66,11 @@ void exibirValorAtual() {
       break;
     case 7:
       snprintf(buffer, sizeof(buffer), "%d", DELAY_LOOP_MS);
-      display("DELAY", buffer, true, false);
+      display("DELAY", buffer, true, true);
       break;
     case 8:
       snprintf(buffer, sizeof(buffer), "%d", DEBUG_PID_ATIVADO);
-      display("DBG PID", buffer, true, false);
+      display("DBG PID", buffer, true, true);
       break;
     case 9:
       snprintf(buffer, sizeof(buffer), "%d", DEBUG_QRE_ATIVADO);
