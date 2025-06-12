@@ -28,7 +28,7 @@ void atualizarMenuAtual(bool direita, bool esquerda) {
     return;
   }
 
-  if (direita && menuAtual < 6) {
+  if (direita && menuAtual < 9) {
     menuAtual++;
     ultimaTroca = millis();
   } else if (esquerda && menuAtual > 1) {
@@ -62,7 +62,19 @@ void exibirValorAtual() {
       break;
     case 6:
       snprintf(buffer, sizeof(buffer), "%d", DUTY_CYCLE_BASE);
-      display("DC BASE", buffer, true, false);
+      display("DC BASE", buffer, true, true);
+      break;
+    case 7:
+      snprintf(buffer, sizeof(buffer), "%d", DELAY_LOOP_MS);
+      display("DELAY", buffer, true, false);
+      break;
+    case 8:
+      snprintf(buffer, sizeof(buffer), "%d", DEBUG_PID_ATIVADO);
+      display("DBG PID", buffer, true, false);
+      break;
+    case 9:
+      snprintf(buffer, sizeof(buffer), "%d", DEBUG_QRE_ATIVADO);
+      display("DBG QRE", buffer, true, false);
       break;
   }
 }
@@ -94,6 +106,15 @@ void ajustarParametro(bool incremento, bool decremento) {
       case 6:
         if (DUTY_CYCLE_BASE < 255) DUTY_CYCLE_BASE += 1;
         break;
+      case 7:
+        if (DELAY_LOOP_MS < 1000) DELAY_LOOP_MS += 1;
+        break;
+      case 8:
+        if (DEBUG_PID_ATIVADO == false) DEBUG_PID_ATIVADO = true;
+        break;
+      case 9:
+        if (DEBUG_QRE_ATIVADO == false) DEBUG_QRE_ATIVADO = true;
+        break;
     }
     ultimaTroca = millis();
   } else if (decremento) {
@@ -115,6 +136,15 @@ void ajustarParametro(bool incremento, bool decremento) {
         break;
       case 6:
         if (DUTY_CYCLE_BASE > 0) DUTY_CYCLE_BASE -= 1;
+        break;
+      case 7:
+        if (DELAY_LOOP_MS > 0) DELAY_LOOP_MS -= 1;
+        break;
+      case 8:
+        if (DEBUG_PID_ATIVADO == true) DEBUG_PID_ATIVADO = false;
+        break;
+      case 9:
+        if (DEBUG_QRE_ATIVADO == true) DEBUG_QRE_ATIVADO = false;
         break;
     }
     ultimaTroca = millis();

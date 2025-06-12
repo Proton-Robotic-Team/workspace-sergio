@@ -29,8 +29,9 @@ extern long tempoTotalDePercurso;
 extern bool tempoDePercursoContabilizado;
 
 // Outros
-const uint8_t DELAY_LOOP_MS = 15;
-const bool DEBUG_ATIVADO = true;
+extern uint16_t DELAY_LOOP_MS;
+extern bool DEBUG_PID_ATIVADO;
+extern bool DEBUG_QRE_ATIVADO;
 extern bool pararCarro;
 extern bool modoDeConfiguracao;
 extern uint8_t menuAtual;

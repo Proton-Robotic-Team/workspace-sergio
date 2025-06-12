@@ -60,24 +60,26 @@ uint16_t posicaoFaixaBranca() {
 }
 
 void valorSensoresQRE() {
-  uint16_t posicao = posicaoFaixaBranca();
-  uint16_t contador = 0;
+  if (DEBUG_QRE_ATIVADO) {
+    uint16_t posicao = posicaoFaixaBranca();
+    uint16_t contador = 0;
 
-  for (uint8_t i = 0; i < NUM_SENSORES; i++) {
-    if (valorDosSensores[i] < 900) {
-      if (i == 0) {
-        contador = 0;
+    for (uint8_t i = 0; i < NUM_SENSORES; i++) {
+      if (valorDosSensores[i] < 900) {
+        if (i == 0) {
+          contador = 0;
+        }
+        contador++;
       }
-      contador++;
-    }
-    Serial.print(valorDosSensores[i]);
-    Serial.print('\t');
+      Serial.print(valorDosSensores[i]);
+      Serial.print('\t');
 
-    if (contador == 8) {
-      pararCarro = true;
+      if (contador == 8) {
+        pararCarro = true;
+      }
     }
+    Serial.println(posicao);
   }
-  Serial.println(posicao);
 }
 
 void delayAntesDoStart() {

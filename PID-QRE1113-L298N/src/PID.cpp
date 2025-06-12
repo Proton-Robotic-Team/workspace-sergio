@@ -42,19 +42,18 @@ void seguirLinha() {
 
   controleMotores(1, velocidadeDireita, velocidadeEsquerda);
 
-  if (DEBUG_ATIVADO) {
-    Serial.print("PID: ");
+  if (DEBUG_PID_ATIVADO) {
+    Serial.print("Correção: ");
     Serial.print(correcao);
     Serial.print(" | PWM da Direita: ");
     Serial.print(velocidadeDireita);
     Serial.print(" | PWM da Esquerda: ");
-    Serial.println(velocidadeEsquerda);
-
-    Serial.print("P: ");
-    Serial.print(KP);
+    Serial.print(velocidadeEsquerda);
+    Serial.print(" | P: ");
+    Serial.print(KP, 3);
     Serial.print(" | I: ");
-    Serial.print(KI);
+    Serial.print(KI, 3);
     Serial.print(" | D: ");
-    Serial.println(KD);
+    Serial.println(KD, 3);
   }
 }
