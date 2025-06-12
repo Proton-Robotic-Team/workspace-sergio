@@ -35,9 +35,6 @@ void controleMotores(uint8_t codigoDeDirecao, uint8_t velocidadeDireita, uint8_t
     digitalWrite(PIN_IN4_L298N, LOW);
   }
 
-  // ledcAttach(PIN_ENA_L298N, FREQUENCIA_HZ, RESOLUCAO);
-  // ledcAttach(PIN_ENB_L298N, FREQUENCIA_HZ, RESOLUCAO);
-
   ledcWrite(PIN_ENA_L298N, velocidadeEsquerda);
   ledcWrite(PIN_ENB_L298N, velocidadeDireita);
 }

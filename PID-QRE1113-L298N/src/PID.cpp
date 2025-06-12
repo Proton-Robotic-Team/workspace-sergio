@@ -30,28 +30,31 @@ int32_t calcularPID() {
 }
 
 void seguirLinha() {
-  if (pararCarro) {
-    controleMotores(0, 255, 255);
-  } else {
-    int32_t correcao = calcularPID();
+  int32_t correcao = calcularPID();
 
-    correcao = constrain(correcao, -150, 150);
+  correcao = constrain(correcao, -150, 150);
 
-    int16_t velocidadeDireita = DUTY_CYCLE_BASE - correcao;
-    int16_t velocidadeEsquerda = DUTY_CYCLE_BASE + correcao;
+  int16_t velocidadeDireita = DUTY_CYCLE_BASE - correcao;
+  int16_t velocidadeEsquerda = DUTY_CYCLE_BASE + correcao;
 
-    velocidadeDireita = constrain(velocidadeDireita, DUTY_CYCLE_MIN, DUTY_CYCLE_MAX);
-    velocidadeEsquerda = constrain(velocidadeEsquerda, DUTY_CYCLE_MIN, DUTY_CYCLE_MAX);
+  velocidadeDireita = constrain(velocidadeDireita, DUTY_CYCLE_MIN, DUTY_CYCLE_MAX);
+  velocidadeEsquerda = constrain(velocidadeEsquerda, DUTY_CYCLE_MIN, DUTY_CYCLE_MAX);
 
-    controleMotores(1, velocidadeDireita, velocidadeEsquerda);
+  controleMotores(1, velocidadeDireita, velocidadeEsquerda);
 
-    if (DEBUG_ATIVADO) {
-      Serial.print("PID: ");
-      Serial.print(correcao);
-      Serial.print(" | PWM da Direita: ");
-      Serial.print(velocidadeDireita);
-      Serial.print(" | PWM da Esquerda: ");
-      Serial.println(velocidadeEsquerda);
-    }
+  if (DEBUG_ATIVADO) {
+    Serial.print("PID: ");
+    Serial.print(correcao);
+    Serial.print(" | PWM da Direita: ");
+    Serial.print(velocidadeDireita);
+    Serial.print(" | PWM da Esquerda: ");
+    Serial.println(velocidadeEsquerda);
+
+    Serial.print("P: ");
+    Serial.print(KP);
+    Serial.print(" | I: ");
+    Serial.print(KI);
+    Serial.print(" | D: ");
+    Serial.println(KD);
   }
 }

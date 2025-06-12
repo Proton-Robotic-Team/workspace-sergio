@@ -31,7 +31,7 @@ void loop() {
   if (modoDeConfiguracao) {
     menuConfigurarCarro();
   } else {
-    valorSensoresQRE();
+    //valorSensoresQRE();
     seguirLinha();
     menuTempoDePercurso();
   }

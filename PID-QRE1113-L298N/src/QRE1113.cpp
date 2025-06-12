@@ -25,23 +25,6 @@ uint16_t iteracoesCalibragem() {
   }
 }
 
-void delayAntesDoStart() {
-
-  long inicio = millis();
-  long agora = 0;
-  uint16_t tempoAntesDoStart = 5000;
-
-  while ((agora - inicio) < tempoAntesDoStart) {
-    agora = millis();
-    digitalWrite(PIN_LED_ESP32, LOW);
-    delay(250);
-    digitalWrite(PIN_LED_ESP32, HIGH);
-    delay(250);
-  }
-
-  digitalWrite(PIN_LED_ESP32, LOW);
-}
-
 void configurarModuloQRE() {
   moduloSensores.setTypeAnalog();
   moduloSensores.setSensorPins((const uint8_t[]){ PIN_D8, PIN_D7, PIN_D6, PIN_D5, PIN_D4, PIN_D3, PIN_D2, PIN_D1 }, NUM_SENSORES);
@@ -95,4 +78,21 @@ void valorSensoresQRE() {
     }
   }
   Serial.println(posicao);
+}
+
+void delayAntesDoStart() {
+
+  long inicio = millis();
+  long agora = 0;
+  uint16_t tempoAntesDoStart = 5000;
+
+  while ((agora - inicio) < tempoAntesDoStart) {
+    agora = millis();
+    digitalWrite(PIN_LED_ESP32, LOW);
+    delay(250);
+    digitalWrite(PIN_LED_ESP32, HIGH);
+    delay(250);
+  }
+
+  digitalWrite(PIN_LED_ESP32, LOW);
 }

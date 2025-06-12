@@ -30,7 +30,7 @@ extern bool tempoDePercursoContabilizado;
 
 // Outros
 const uint8_t DELAY_LOOP_MS = 15;
-const bool DEBUG_ATIVADO = false;
+const bool DEBUG_ATIVADO = true;
 extern bool pararCarro;
 extern bool modoDeConfiguracao;
 extern uint8_t menuAtual;
