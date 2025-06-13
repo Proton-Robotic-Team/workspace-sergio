@@ -33,7 +33,8 @@ void loop() {
   } else {
     valorSensoresQRE();
     seguirLinha();
-    menuTempoDePercurso();
+    // menuTempoDePercurso();
+    // controleMotores(1, 255, 255);
   }
 
   delay(DELAY_LOOP_MS);

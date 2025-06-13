@@ -19,9 +19,9 @@ extern float KD;
 
 // Usado no Menu.cpp
 const unsigned long INTERVALO_DEBOUNCE_MS = 200;
-const float PASSO_INCREMENTO_KP = 0.01f;
+const float PASSO_INCREMENTO_KP = 0.005f;
 const float PASSO_INCREMENTO_KI = 0.001f;
-const float PASSO_DECREMENTO_KD = 0.1f;
+const float PASSO_DECREMENTO_KD = 0.05f;
 
 // Para contador de tempo de percurso
 extern long inicioDoPercurso;
