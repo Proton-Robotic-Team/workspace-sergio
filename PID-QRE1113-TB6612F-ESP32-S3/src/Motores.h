@@ -1,0 +1,8 @@
+#ifndef MOTORES_H
+#define MOTORES_H
+
+void configMotores();
+void controleMotores(uint8_t codigoDeDirecao, uint8_t velocidadeDireita, uint8_t velocidadeEsquerda);
+double valorRPM();
+
+#endif
