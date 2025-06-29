@@ -4,18 +4,8 @@
 #include <QTRSensors.h>
 #include <Arduino.h>
 #include "QRE1113.h"
-
-const uint8_t PIN_D1 = 1;
-const uint8_t PIN_D2 = 2;
-const uint8_t PIN_D3 = 6;
-const uint8_t PIN_D4 = 7;
-const uint8_t PIN_D5 = 8;
-const uint8_t PIN_D6 = 3;
-const uint8_t PIN_D7 = 9;
-const uint8_t PIN_D8 = 10;
-
-bool DEBUG_QRE_ATIVADO = true;
-bool pararCarro = false;
+#include "Pinagem.h"
+#include "Configuracoes.h"
 
 QTRSensors moduloSensores;
 const uint8_t NUM_SENSORES = 8;
@@ -92,7 +82,6 @@ void valorSensoresQRE() {
   }
 }
 
-/*
 void delayAntesDoStart() {
 
   long inicio = millis();
@@ -101,12 +90,11 @@ void delayAntesDoStart() {
 
   while ((agora - inicio) < tempoAntesDoStart) {
     agora = millis();
-    digitalWrite(PIN_LED_ESP32, LOW);
+    //digitalWrite(PIN_LED_ESP32, LOW);
     delay(250);
-    digitalWrite(PIN_LED_ESP32, HIGH);
+    //digitalWrite(PIN_LED_ESP32, HIGH);
     delay(250);
   }
 
-  digitalWrite(PIN_LED_ESP32, LOW);
+  // digitalWrite(PIN_LED_ESP32, LOW);
 }
-*/

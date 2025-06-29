@@ -1,25 +1,6 @@
 #include <Arduino.h>
 #include "Motores.h"
-
-// Motor da esquerda
-const uint8_t PIN_DRV_PWMA = 11;
-const uint8_t PIN_DRV_AIN1 = 13;
-const uint8_t PIN_DRV_AIN2 = 14;
-const uint8_t PIN_ENCODER_C1_E = 39;
-const uint8_t PIN_ENCODER_C2_E = 40;
-
-// Motor da direita
-const uint8_t PIN_DRV_PWMB = 12;
-const uint8_t PIN_DRV_BIN1 = 15;
-const uint8_t PIN_DRV_BIN2 = 16;
-const uint8_t PIN_ENCODER_C1_D = 17;
-const uint8_t PIN_ENCODER_C2_D = 18;
-
-// Agora está ligado direto no 3V3
-//const uint8_t PIN_DRV_STBY = 17;
-
-const uint16_t FREQUENCIA_HZ = 20000;
-const uint8_t RESOLUCAO = 8;
+#include "Pinagem.h"
 
 long valorEncoderMotorDireito = 0;
 long valorEncoderMotorEsquerdo = 0;
@@ -42,6 +23,11 @@ void atualizarEncoderMotorEsquerdo() {
   } else {
     valorEncoderMotorEsquerdo--;
   }
+}
+
+void lerVariacaoEncoder() {
+  attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_C1_D), atualizarEncoderMotorDireito, RISING);
+  attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_C1_E), atualizarEncoderMotorEsquerdo, RISING);
 }
 
 void calcularRPM() {
@@ -83,27 +69,6 @@ void printarRPM() {
     Serial.println(rpmMotorEsquerdo);
     ultimoPrint = millis();
   }
-}
-
-void configMotores() {
-  pinMode(PIN_DRV_PWMA, OUTPUT);
-  pinMode(PIN_DRV_PWMB, OUTPUT);
-  pinMode(PIN_DRV_AIN1, OUTPUT);
-  pinMode(PIN_DRV_AIN2, OUTPUT);
-  pinMode(PIN_DRV_BIN1, OUTPUT);
-  pinMode(PIN_DRV_BIN2, OUTPUT);
-  ///pinMode(PIN_DRV_STBY, OUTPUT);
-
-  ledcAttach(PIN_DRV_PWMA, FREQUENCIA_HZ, RESOLUCAO);
-  ledcAttach(PIN_DRV_PWMB, FREQUENCIA_HZ, RESOLUCAO);
-
-  pinMode(PIN_ENCODER_C1_D, INPUT);
-  pinMode(PIN_ENCODER_C2_D, INPUT);
-  pinMode(PIN_ENCODER_C1_E, INPUT);
-  pinMode(PIN_ENCODER_C2_E, INPUT);
-
-  attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_C1_D), atualizarEncoderMotorDireito, RISING);
-  attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_C1_E), atualizarEncoderMotorEsquerdo, RISING);
 }
 
 void controleMotores(uint8_t codigoDeDirecao, uint8_t velocidadeDireita, uint8_t velocidadeEsquerda) {

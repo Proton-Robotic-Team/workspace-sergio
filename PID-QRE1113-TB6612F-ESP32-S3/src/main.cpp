@@ -1,28 +1,50 @@
-#include <Arduino.h>
-#include "Motores.h"
-#include "TesteDisplay.h"
-#include "ServidorWeb.h"
+#include "Pinagem.h"
 #include "QRE1113.h"
+#include "Motores.h"
+#include "Configuracoes.h"
+#include "PID.h"
+#include "Display.h"
+#include "Menus.h"
+#include "ServidorWeb.h"
 
 // Não esqueça de upar os arquivos do servidor web
 // 1 - Abra o menu de opções do PlatformIO
 // 2 - Platform > Build Filesystem Image
 // 3 - Platform > Upload Filesystem Image
 
-short valorPWM = 255;
-
 void setup() {
-  Serial.begin(115200);
-  configMotores();
-  configDisplayTeste();
-  configurarServidorWeb();
-  configurarModuloQRE();
+
+  pinMode(PIN_CONFIG_MODE, INPUT_PULLUP);
+  modoDeConfiguracao = digitalRead(PIN_CONFIG_MODE) == LOW;
+  configuracoesSalvas();
+  iniciarDisplay();
+
+  if (modoDeConfiguracao) {
+    configurarPinosModoConfig();
+  } else {
+    Serial.begin(115200);
+    configurarPinosModoNormal();
+    configurarServidorWeb();
+    display("Calibrando");
+    configurarModuloQRE();
+    display("Iniciando");
+    delayAntesDoStart();
+    limparDisplay();
+  }
 }
 
 void loop() {
-  controleMotores(1, valorPWM, valorPWM);
-  // printarRPM();
-  servidorAtivo();
-  valorSensoresQRE();
-  delay(25);
+
+  if (modoDeConfiguracao) {
+    menuConfigurarCarro();
+  } else {
+    valorSensoresQRE();
+    seguirLinha();
+    // menuTempoDePercurso();
+    // controleMotores(1, 255, 255);
+    // printarRPM();
+    servidorAtivo();
+  }
+
+  delay(DELAY_LOOP_MS);
 }
