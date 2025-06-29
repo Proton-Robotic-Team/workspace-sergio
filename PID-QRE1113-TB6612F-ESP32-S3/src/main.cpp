@@ -2,6 +2,7 @@
 #include "Motores.h"
 #include "TesteDisplay.h"
 #include "ServidorWeb.h"
+#include "QRE1113.h"
 
 // Não esqueça de upar os arquivos do servidor web
 // 1 - Abra o menu de opções do PlatformIO
@@ -15,10 +16,13 @@ void setup() {
   configMotores();
   configDisplayTeste();
   configurarServidorWeb();
+  configurarModuloQRE();
 }
 
 void loop() {
   controleMotores(1, valorPWM, valorPWM);
   // printarRPM();
   servidorAtivo();
+  valorSensoresQRE();
+  delay(25);
 }

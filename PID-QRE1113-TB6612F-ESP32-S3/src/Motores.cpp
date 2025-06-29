@@ -12,10 +12,11 @@ const uint8_t PIN_ENCODER_C2_E = 40;
 const uint8_t PIN_DRV_PWMB = 12;
 const uint8_t PIN_DRV_BIN1 = 15;
 const uint8_t PIN_DRV_BIN2 = 16;
-const uint8_t PIN_ENCODER_C1_D = 6;
-const uint8_t PIN_ENCODER_C2_D = 7;
+const uint8_t PIN_ENCODER_C1_D = 17;
+const uint8_t PIN_ENCODER_C2_D = 18;
 
-const uint8_t PIN_DRV_STBY = 17;
+// Agora está ligado direto no 3V3
+//const uint8_t PIN_DRV_STBY = 17;
 
 const uint16_t FREQUENCIA_HZ = 20000;
 const uint8_t RESOLUCAO = 8;
@@ -91,7 +92,7 @@ void configMotores() {
   pinMode(PIN_DRV_AIN2, OUTPUT);
   pinMode(PIN_DRV_BIN1, OUTPUT);
   pinMode(PIN_DRV_BIN2, OUTPUT);
-  pinMode(PIN_DRV_STBY, OUTPUT);
+  ///pinMode(PIN_DRV_STBY, OUTPUT);
 
   ledcAttach(PIN_DRV_PWMA, FREQUENCIA_HZ, RESOLUCAO);
   ledcAttach(PIN_DRV_PWMB, FREQUENCIA_HZ, RESOLUCAO);
@@ -107,7 +108,7 @@ void configMotores() {
 
 void controleMotores(uint8_t codigoDeDirecao, uint8_t velocidadeDireita, uint8_t velocidadeEsquerda) {
 
-  digitalWrite(PIN_DRV_STBY, HIGH);
+  //digitalWrite(PIN_DRV_STBY, HIGH);
 
   if (codigoDeDirecao == 1) {
     // Para frente
