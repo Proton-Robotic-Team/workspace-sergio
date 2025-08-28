@@ -1,11 +1,3 @@
-# Repositório de Módulos de Teste
+# Repositório de Código em Testes
 
-Este repositório contém os códigos-fonte utilizados para testar diferentes módulos de hardware e software ao longo do nosso projeto.
-
-## Estrutura
-
-Cada pasta neste repositório corresponde a um módulo específico que foi testado. Dentro de cada diretório, você encontrará os arquivos de código e esquemas de ligação (se necessário).
-
-## Objetivo
-
-Centralizar e organizar os testes realizados com diferentes componentes, facilitando a consulta, reuso e documentação dos experimentos.
+:warning: Atenção: eu (Sérgio) uso este repositório como local de armazenamento do código que estou testando. Caso queira modificar alguma informação, por favor, faça um fork. Obrigado.
