@@ -57,7 +57,7 @@ void calcularRPM() {
 
 void printarRPM() {
 
-  short INTERVALO_DE_EXIBICAO_MS = 200;
+  short INTERVALO_DE_EXIBICAO_MS = 0;
 
   static unsigned long ultimoPrint = 0;
 

@@ -17,19 +17,16 @@ void setup() {
   pinMode(PIN_CONFIG_MODE, INPUT_PULLUP);
   modoDeConfiguracao = digitalRead(PIN_CONFIG_MODE) == LOW;
   configuracoesSalvas();
-  iniciarDisplay();
 
   if (modoDeConfiguracao) {
     configurarPinosModoConfig();
+    iniciarDisplay();
   } else {
     Serial.begin(115200);
     configurarPinosModoNormal();
     configurarServidorWeb();
-    display("Calibrando");
     configurarModuloQRE();
-    display("Iniciando");
     delayAntesDoStart();
-    limparDisplay();
   }
 }
 
@@ -38,11 +35,11 @@ void loop() {
   if (modoDeConfiguracao) {
     menuConfigurarCarro();
   } else {
-    valorSensoresQRE();
-    seguirLinha();
+    //valorSensoresQRE();
+    //seguirLinha();
     // menuTempoDePercurso();
-    // controleMotores(1, 255, 255);
-    // printarRPM();
+    controleMotores(1, 255, 255);
+    printarRPM();
     servidorAtivo();
   }
 
