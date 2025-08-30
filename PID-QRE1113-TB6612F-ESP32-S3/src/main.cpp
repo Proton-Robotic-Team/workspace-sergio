@@ -42,7 +42,7 @@ void loop() {
     seguirLinha();
     // menuTempoDePercurso();
     // controleMotores(1, 255, 255);
-    // printarRPM();
+    printarRPM();
     servidorAtivo();
   }
 

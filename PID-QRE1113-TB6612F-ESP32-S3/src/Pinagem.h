@@ -49,8 +49,14 @@ inline void configurarPinosModoNormal() {
   pinMode(PIN_DRV_BIN1, OUTPUT);
   pinMode(PIN_DRV_BIN2, OUTPUT);
 
-  ledcAttach(PIN_DRV_PWMA, FREQUENCIA_HZ, RESOLUCAO);
-  ledcAttach(PIN_DRV_PWMB, FREQUENCIA_HZ, RESOLUCAO);
+  int canalA = 0; // escolha um canal de 0 a 15
+ledcSetup(canalA, FREQUENCIA_HZ, RESOLUCAO);
+ledcAttachPin(PIN_DRV_PWMA, canalA);
+
+int canalB = 0; // escolha um canal de 0 a 15
+ledcSetup(canalA, FREQUENCIA_HZ, RESOLUCAO);
+ledcAttachPin(PIN_DRV_PWMB, canalB);
+
 
   pinMode(PIN_ENCODER_C1_D, INPUT);
   pinMode(PIN_ENCODER_C2_D, INPUT);
