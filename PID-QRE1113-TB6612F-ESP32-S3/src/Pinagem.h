@@ -29,12 +29,12 @@ const uint8_t PIN_ENCODER_C2_D = 18;
 
 const uint8_t PIN_D1 = 1;
 const uint8_t PIN_D2 = 2;
-const uint8_t PIN_D3 = 6;
-const uint8_t PIN_D4 = 7;
-const uint8_t PIN_D5 = 8;
-const uint8_t PIN_D6 = 3;
-const uint8_t PIN_D7 = 9;
-const uint8_t PIN_D8 = 10;
+const uint8_t PIN_D3 = 10;
+const uint8_t PIN_D4 = 9;
+const uint8_t PIN_D5 = 3;
+const uint8_t PIN_D6 = 8;
+const uint8_t PIN_D7 = 7;
+const uint8_t PIN_D8 = 6;
 
 const uint8_t SDA_PIN = 4;
 const uint8_t SCL_PIN = 5;

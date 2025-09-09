@@ -35,11 +35,11 @@ void loop() {
   if (modoDeConfiguracao) {
     menuConfigurarCarro();
   } else {
-    //valorSensoresQRE();
-    //seguirLinha();
+    valorSensoresQRE();
+    seguirLinha();
     // menuTempoDePercurso();
-    controleMotores(1, 255, 255);
-    printarRPM();
+    // controleMotores(1, 255, 255);
+    // printarRPM();
     servidorAtivo();
   }
 
