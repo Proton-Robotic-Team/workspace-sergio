@@ -5,7 +5,7 @@
 #include "PID.h"
 #include "Display.h"
 #include "Menus.h"
-#include "ServidorWeb.h"
+// #include "ServidorWeb.h"
 
 // Não esqueça de upar os arquivos do servidor web
 // 1 - Abra o menu de opções do PlatformIO
@@ -24,7 +24,7 @@ void setup() {
   } else {
     Serial.begin(115200);
     configurarPinosModoNormal();
-    configurarServidorWeb();
+    // configurarServidorWeb();
     configurarModuloQRE();
     delayAntesDoStart();
   }
@@ -38,9 +38,12 @@ void loop() {
     valorSensoresQRE();
     seguirLinha();
     // menuTempoDePercurso();
-    // controleMotores(1, 255, 255);
+
+    // Direção, direita, esquerda
+    // controleMotores(1, 0, 150);
+
     // printarRPM();
-    servidorAtivo();
+    // servidorAtivo();
   }
 
   delay(DELAY_LOOP_MS);

@@ -90,11 +90,11 @@ void delayAntesDoStart() {
 
   while ((agora - inicio) < tempoAntesDoStart) {
     agora = millis();
-    //digitalWrite(PIN_LED_ESP32, LOW);
+    digitalWrite(PIN_LED_ESP32, LOW);
     delay(250);
-    //digitalWrite(PIN_LED_ESP32, HIGH);
+    digitalWrite(PIN_LED_ESP32, HIGH);
     delay(250);
   }
 
-  // digitalWrite(PIN_LED_ESP32, LOW);
+  digitalWrite(PIN_LED_ESP32, LOW);
 }

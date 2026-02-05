@@ -11,7 +11,7 @@ const uint8_t PIN_MENU_ESQUERDA = 47;
 const uint8_t PIN_MENU_INCREMENTO = 38;
 const uint8_t PIN_MENU_DECREMENTO = 21;
 
-// const uint8_t PIN_LED_ESP32 = 2;
+const uint8_t PIN_LED_ESP32 = 44;
 
 // Motor da esquerda
 const uint8_t PIN_DRV_PWMA = 11;
@@ -40,7 +40,7 @@ const uint8_t SDA_PIN = 4;
 const uint8_t SCL_PIN = 5;
 
 inline void configurarPinosModoNormal() {
-  // pinMode(PIN_LED_ESP32, OUTPUT);
+  pinMode(PIN_LED_ESP32, OUTPUT);
 
   pinMode(PIN_DRV_PWMA, OUTPUT);
   pinMode(PIN_DRV_PWMB, OUTPUT);
