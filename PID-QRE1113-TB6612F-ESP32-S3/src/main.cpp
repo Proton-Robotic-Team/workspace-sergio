@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include "Pinagem.h"
 #include "QRE1113.h"
 #include "Motores.h"
@@ -5,6 +6,7 @@
 #include "PID.h"
 #include "Display.h"
 #include "Menus.h"
+#include "LSM6DS3.h"
 // #include "ServidorWeb.h"
 
 // Não esqueça de upar os arquivos do servidor web
@@ -14,18 +16,24 @@
 
 void setup() {
 
+  Wire.setPins(SDA_PIN, SCL_PIN);
+  Wire.begin();
+
   pinMode(PIN_CONFIG_MODE, INPUT_PULLUP);
   modoDeConfiguracao = digitalRead(PIN_CONFIG_MODE) == LOW;
   configuracoesSalvas();
 
   if (modoDeConfiguracao) {
     configurarPinosModoConfig();
-    iniciarDisplay();
+    // O I2C já é inicializado para o LSM6DS3.
+    // A inicialização do display aqui ficou redundante
+    // iniciarDisplay();
   } else {
     Serial.begin(115200);
     configurarPinosModoNormal();
     // configurarServidorWeb();
     configurarModuloQRE();
+    inicializarLSM6DS3();
     delayAntesDoStart();
   }
 }
@@ -45,6 +53,6 @@ void loop() {
     // printarRPM();
     // servidorAtivo();
   }
-
+  lerSensorLSM6DS3();
   delay(DELAY_LOOP_MS);
 }

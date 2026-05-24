@@ -76,10 +76,15 @@ void display(const char *titulo) {
   u8g2.sendBuffer();
 }
 
+// Essa função se tornou redundante, já que o I2C já é inicializado pelo acelerômetro
+//Protótipo comentado também
+
+/*
 void iniciarDisplay() {
   Wire.begin(SDA_PIN, SCL_PIN);
   u8g2.begin();
 }
+*/
 
 void limparDisplay() {
   u8g2.clearBuffer();
